@@ -1,0 +1,11 @@
+.idea
+.git
+devops
+.venv
+__pycache__
+!devops/init.sh
+.env
+README.md
+.dockerignore
+*.pyc
+*.pyx
