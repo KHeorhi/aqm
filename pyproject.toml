@@ -1,10 +1,36 @@
 [project]
 name = "aqm"
 version = "0.0.1"
-description = "Add your description here"
+description = "Попытка реализовать сервис для выполнения разных задач в очереди библиотеки Asyncio.clear"
 requires-python = ">=3.14"
 dependencies = [
     "asyncio>=4.0.0",
     "fastapi>=0.135.1",
     "uvicorn>=0.41.0",
+]
+
+
+[dependency-groups]
+dev = [
+    "pylint>=4.0.5",
+    "python-dotenv>=1.2.2",
+]
+
+[tool.pylint.main]
+ignore = [
+    ".venv",
+    "devops",
+]
+max-line-length=120
+py-version = "3.14"
+
+[tool.pylint."message control"]
+disable = [
+    "too-many-ancestors",
+    "too-few-public-methods",
+    "missing-module-docstring",
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "unsubscriptable-object",
+    "unsubscriptable-ellipsis",
 ]
