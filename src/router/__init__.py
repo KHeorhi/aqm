@@ -1,6 +1,7 @@
-from src.router.hello_world import router as router_hello_world
+from fastapi import APIRouter
+from src.router.add_task import router as router_add_task
 
 
-__all__ = [
-    'router_hello_world',
-]
+api_router = APIRouter()
+
+api_router.include_router(router_add_task)
