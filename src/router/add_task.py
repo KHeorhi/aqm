@@ -1,7 +1,8 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Depends, Query
 from fastapi.responses import JSONResponse
 from fastapi import status
-from src.schemas.task.input_model import NewTaskParamsRequest
+from src.services.manager_queue import queue_manager
+from src.schemas.task.input_model import QueueTask
 from src.schemas.task.output_model import NewTaskResponse
 
 
@@ -9,12 +10,14 @@ router = APIRouter(prefix='/task', tags=['task'])
 
 
 @router.post('/add_new_task')
-async def add_new_task_to_queue(queue_params: NewTaskParamsRequest):
+async def add_new_task_to_queue(queue_params: QueueTask):
     """Метод предназначен для добавления новой задачи в очередь."""
 
+    await queue_manager.put_task(queue_params)
+
     message = NewTaskResponse(
-        task_name=queue_params.task_name,
-        task_id='xxxxxxx',  # Будет заменен на uuid с типом данным строка полученным при заведении задачи для очереди
+        name=queue_params.name,
+        id=queue_params.id,
     )
     return JSONResponse(
         status_code=status.HTTP_201_CREATED, content=message.model_dump()

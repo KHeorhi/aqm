@@ -1,4 +1,4 @@
-from enum import IntEnum
+from enum import IntEnum, StrEnum, auto
 
 
 class TaskStatus(IntEnum):
@@ -7,3 +7,7 @@ class TaskStatus(IntEnum):
     RUNNING = 2
     FINISHED = 3
     FAILED = 4
+
+
+class SupportQueueTask(StrEnum):
+    EMPTY_TASK = auto()
